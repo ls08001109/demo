@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    url: redis://localhost:6379
+  datasource:
+    url: jdbc:mysql://localhost:3306/base1?serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    initialSize: 5
+    maxActive: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 5
+    timeBetweenEvictionRunsMillis: 60000
+    poolPreparedStatements: true
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    validationQuery: SELECT 1 FROM DUAL
+    filters: stat,wall,log4j
+
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: csnt.oauth_server.pojo
+  global-config:
+    db-config:
+      id-type: AUTO
+      field-strategy: IGNORED
+      column-underline: true
+      db-type: mysql
+    refresh: true
+
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+token:
+  ttlSeconds: 1800
+
+
+
+
